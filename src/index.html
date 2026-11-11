@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#131b16">
+  <title>水果忍者 · 再来一刀</title>
+  <style>/* STYLES */</style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a class="brand" href="#" id="brand" aria-label="水果忍者首页"><span class="brand-mark" aria-hidden="true"></span><span>水果忍者<small>FRUIT NINJA</small></span></a>
+      <span class="header-note">生活偶尔复杂，快乐只需一刀。</span>
+      <div class="utilities">
+        <button class="icon-button" id="settings-button" aria-label="手感设置" title="手感设置"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16M8 4v6m8 4v6"/></svg></button>
+        <button class="icon-button" id="help-button" aria-label="玩法说明" title="玩法说明"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 1.7-2.5 2-2.5 3.5M12 16.5v.1"/></svg></button>
+        <button class="icon-button" id="sound-button" aria-label="关闭音效" aria-pressed="true" title="音效 · M"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4zM15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/><path class="mute-stroke" d="m3 3 18 18"/></svg></button>
+        <button class="icon-button fullscreen-button" id="fullscreen-button" aria-label="全屏游戏" title="全屏"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
+      </div>
+    </header>
+
+    <main class="arena" id="arena" aria-label="水果忍者游戏区域">
+      <canvas id="backdrop" aria-hidden="true"></canvas>
+      <canvas id="game" tabindex="0" aria-label="按住鼠标或滑动手指切开水果，避开炸弹"></canvas>
+      <div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div>
+
+      <section id="menu" class="menu screen">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> 新鲜出场 · 即刻开切</div>
+          <h1><span>FRUIT</span><span>NINJA<span class="title-dot">.</span></span></h1>
+          <p class="tagline">手起，刀落。烦恼切掉。</p>
+          <p class="hero-description">划出你的刀锋，把平凡的一刻切成满屏痛快。</p>
+          <button class="start-button" id="start-button"><span>开始切水果</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button>
+          <div class="personal-best"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v6a4 4 0 0 1-8 0zM8 5H4v3a4 4 0 0 0 4 4m8-7h4v3a4 4 0 0 1-4 4m-4 1v5m-4 3h8m-6-3h4"/></svg><span id="menu-best">你的第一项纪录，等你来创造</span></div>
+        </div>
+        <div class="hero-seal" aria-hidden="true">一<br>刀<br>入<br>魂</div>
+        <div class="mode-section">
+          <div class="mode-heading">选个玩法<span>CHOOSE YOUR FLOW</span></div>
+          <div class="mode-options" role="group" aria-label="游戏模式">
+            <button class="mode selected" data-mode="classic" aria-pressed="true"><span class="mode-symbol" aria-hidden="true">斩</span><span class="mode-copy"><strong>经典模式 <small>CLASSIC</small></strong><span>三次机会，挑战你的极限</span></span><span class="mode-check" aria-hidden="true"></span></button>
+            <button class="mode" data-mode="arcade" aria-pressed="false"><span class="mode-symbol" aria-hidden="true">燃</span><span class="mode-copy"><strong>街机模式 <small>ARCADE</small></strong><span>60 秒冲刺，连击火力全开</span></span><span class="mode-check" aria-hidden="true"></span></button>
+            <button class="mode" data-mode="zen" aria-pressed="false"><span class="mode-symbol" aria-hidden="true">禅</span><span class="mode-copy"><strong>禅模式 <small>ZEN</small></strong><span>90 秒，只管享受切水果</span></span><span class="mode-check" aria-hidden="true"></span></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="hud" id="hud" hidden aria-label="游戏状态">
+        <div class="score-block"><span class="hud-label">得分</span><strong id="score">0</strong><span class="record">最佳 <b id="best">0</b></span></div>
+        <div class="hud-center"><span id="mode-label">经典模式</span><span id="wave-label">让水果飞一会儿</span></div>
+        <div class="hud-right"><div class="lives" id="lives" aria-label="剩余三次机会"><span>×</span><span>×</span><span>×</span></div><div class="timer" id="timer" hidden><small>剩余时间</small><strong id="time">60</strong><span>s</span></div><button class="icon-button pause-button" id="pause-button" aria-label="暂停游戏" title="暂停 · 空格"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button></div>
+      </section>
+      <div class="game-tip" id="game-tip" hidden>按住鼠标划过水果 · 小心炸弹</div>
+      <div class="frenzy-banner" id="frenzy-banner" hidden><strong>狂热时刻</strong><span>双倍得分！</span><i id="frenzy-progress"></i></div>
+      <div class="countdown" id="countdown" hidden></div>
+      <div class="flash" id="flash"></div>
+      <div class="miss-flash" id="miss-flash"></div>
+      <div class="miss-notice" id="miss-notice" role="status" aria-live="polite" hidden></div>
+      <div class="combo-readout" id="combo-readout" hidden><strong id="combo-value">3</strong><span>连击</span></div>
+      <div class="arena-bottom" id="arena-bottom"><span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="6"/><path d="M12 2v7"/></svg>按住鼠标拖动 / 手指滑动</span><span>水果要切，炸弹要躲。</span><span class="bottom-right">小小水果，大大解压</span></div>
+
+      <dialog id="pause-dialog" class="modal"><div class="modal-kicker">TAKE A BREATH</div><h2>刀锋稍歇</h2><p>水果也在等你，准备好就继续。</p><button class="start-button" id="resume-button">继续游戏 <span aria-hidden="true">↗</span></button><button class="secondary-button" id="pause-home">返回首页</button></dialog>
+      <dialog id="settings-dialog" class="modal settings-modal"><button class="dialog-close icon-button" id="close-settings" aria-label="关闭设置">×</button><div class="modal-kicker">FIND YOUR FEEL</div><h2>这一刀，听你的。</h2><label class="setting-row" for="volume"><span>音效音量<small>切果、连击与漏果报警</small></span><input id="volume" type="range" min="0" max="100" value="65" aria-label="音效音量"></label><label class="setting-row" for="quality"><span>画面效果<small>根据设备自动平衡流畅度</small></span><select id="quality"><option value="auto">自动</option><option value="rich">效果全开</option><option value="light">流畅优先</option></select></label><label class="setting-row" for="motion"><span>震动与慢动作<small>连击时轻微震屏，手机支持时振动</small></span><input id="motion" type="checkbox" checked></label><label class="setting-row" for="blade"><span>刀锋颜色<small>选择你的刀光</small></span><select id="blade"><option value="mint">薄荷流光</option><option value="gold">落日金芒</option><option value="ice">冰蓝刃影</option></select></label><button class="start-button" id="settings-done">设置好了 <span aria-hidden="true">↗</span></button></dialog>
+      <dialog id="result-dialog" class="modal result-modal"><div class="modal-kicker" id="result-kicker">NICELY SLICED</div><h2 id="result-title">这一刀，够痛快。</h2><p id="result-reason"></p><div class="final-score"><strong id="result-score">0</strong><span>本局得分</span></div><div class="result-stats"><div><strong id="result-fruits">0</strong><span>切开水果</span></div><div><strong id="result-combo">0</strong><span>最高连击</span></div><div><strong id="result-best">0</strong><span>历史最佳</span></div></div><button class="start-button" id="restart-button">再来一刀 <span aria-hidden="true">↗</span></button><button class="secondary-button" id="result-home">换个玩法</button></dialog>
+      <dialog id="help-dialog" class="modal help-modal"><button class="dialog-close icon-button" id="close-help" aria-label="关闭玩法说明">×</button><div class="modal-kicker">THE WAY OF THE BLADE</div><h2>三招，上手。</h2><div class="help-row"><span>01</span><div><h3>划过，就切开</h3><p>按住鼠标拖动，或在屏幕上滑动手指。水果从底部飞起，抓准时机出刀。</p></div></div><div class="help-row"><span>02</span><div><h3>一刀多果，连击加分</h3><p>同一刀快速切开 3 个或更多水果，获得连击奖励。街机模式累计切开 20 个水果，进入 6 秒双倍得分的狂热时刻。</p></div></div><div class="help-row"><span>03</span><div><h3>记住你的玩法</h3><p>经典：漏掉 3 个水果或切中炸弹，本局结束。<br>街机：60 秒冲刺，炸弹扣 10 分，漏果不扣分。<br>禅：90 秒，没有炸弹，没有漏果惩罚。</p></div></div><div class="keyboard-help"><span><kbd>Space</kbd> 暂停 / 继续</span><span><kbd>M</kbd> 音效</span><span><kbd>Esc</kbd> 暂停</span></div></dialog>
+    </main>
+    <footer class="footer"><span>为每一次痛快挥刀而生</span><span>无需下载 · 随时开切</span></footer>
+  </div>
+  <script>/* GAME */</script>
+</body>
+</html>

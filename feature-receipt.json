@@ -1,0 +1,9 @@
+{
+  "intent": "基于 https://github.com/yongqixue99-hue/fruit-ninja-dojo 源代码，使用 PICO swan / PICO CLI 完成空间应用开发。水果直接飞在身前：用双手挥动切 3D 水果，旁边显示计分和设置窗口。原源码位于工作区 fruit-ninja-dojo。",
+  "target": "fruit-ninja-dojo/spatial",
+  "generationMode": "new_project",
+  "schemaVersion": "spatialcraft.intent-brief/v1",
+  "applicationId": "com.example.fruitninjadojo.p3b8a91c2",
+  "applicationIdSource": "generated_default",
+  "briefPath": "fruit-ninja-dojo/spatial/.scratch/intent-brief.md"
+}
