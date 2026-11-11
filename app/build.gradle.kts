@@ -9,7 +9,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.fruitninjadojo.p3b8a91c2"
+        applicationId = "cn.mindsoul.fruitninja"
         minSdk = 35
         targetSdk = 35
         versionCode = 1

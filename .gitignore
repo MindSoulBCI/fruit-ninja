@@ -9,3 +9,17 @@
 local.properties
 .idea/
 .openai/
+
+# Android / Gradle
+.gradle/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.jks
+*.keystore
+*.hprof
+*.iml
+.DS_Store
