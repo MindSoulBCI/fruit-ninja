@@ -84,7 +84,7 @@ fun AccountWindow() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Image(painterResource(R.drawable.dojo_logo), "水果忍者", Modifier.size(96.dp))
+            Image(painterResource(R.mipmap.ic_spatial_launcher), "水果忍者", Modifier.size(96.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 ToggleableChip(
                     label = { Text("登录") },
